@@ -1,0 +1,44 @@
+[
+    {
+        "Jname": "Software Engineer",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    },
+    {  
+        "Jname": "Data Analyst",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    },
+    {
+        "Jname": "Frontend Developer",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    },
+    {
+        "Jname": "Web Designer",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    },
+    {
+        "Jname": "Computer Engineer",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    },
+    {
+        "Jname": "IT",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    },
+    {
+        "Jname": "Backend developer",
+        "descript": "We need an intern",
+        "require": "to be excellent and skillful",
+        "companyN":"XYZ"
+    }
+  ]

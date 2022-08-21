@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list lines="full">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name" type="text" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="text" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <app-show-hide-password>
+            <ion-input value="123" type="password" placeholder="Password" formControlName="password"></ion-input>
+          </app-show-hide-password>
+        </ion-item>
+
+        <div class="ion-padding-top">
+
+          <ion-item>
+            <ion-select placeholder="Register as?" formControlName="role">
+              <ion-select-option value="Student">Student</ion-select-option>
+              <ion-select-option value="Company">Company</ion-select-option>
+              <ion-select-option value="Supervisor">Supervisor</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block">Add</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-list>
+  </ion-card>
+</ion-content>

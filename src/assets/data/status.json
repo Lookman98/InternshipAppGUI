@@ -1,0 +1,15 @@
+[
+    {
+       "status": "Your Application for software engineer at WDS was accepted" 
+    },
+    {
+        "status": "Your Application for computer engineer at SAE was rejected" 
+     },
+     {
+        "status": "Your Application for IT at XYZ was rejected" 
+     },
+     {
+        "status": "Your Application for software engineer at ADS was accepted" 
+     }
+
+]

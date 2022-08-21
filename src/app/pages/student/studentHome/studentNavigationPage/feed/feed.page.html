@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color='danger'>
+    <ion-title>Job List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+
+
+  <ion-list>
+    <ion-item *ngFor="let job of JobList" (click)="jobDetail(job._id, true)">
+      <ion-label>
+        <h2>{{ job.title }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+</ion-content>
+
+
+<ion-modal [isOpen]="isJobDetailModal">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Detail
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="close(false,'isJobDetailModal')">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-card>
+
+        <img src="../../../../assets/shapes.svg" />
+        <ion-card-header>
+          <ion-card-subtitle></ion-card-subtitle>
+          <ion-card-title>{{selectedJob.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-start">
+              <ion-col class="ion-padding-bottom">
+                <div class="ion-text-uppercase">Description:</div>
+                <div>{{selectedJob.description}}</div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+        </ion-card-content>
+      </ion-card>
+
+      <section>
+        <ion-row>
+          <ion-col padding>
+            <ion-button id="open-modal" expand="block" (click)="apply(user)">Apply</ion-button>
+          </ion-col>
+        </ion-row>
+      </section>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<!-- End Job Detail Modal -->

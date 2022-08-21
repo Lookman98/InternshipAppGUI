@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color='danger'>
+    <ion-title>Log Book</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-item>
+    <ion-button (click)="logout()" expand="block" shape="round" color="danger" >Log Off</ion-button>
+  </ion-item> -->
+
+
+  
+<ion-item>
+  <input type="file" accept="application/pdf" (change)="onFileChange($event)" />
+</ion-item>
+<ion-button color="primary" expand="full" (click)="submitForm()">Upload</ion-button>
+
+<section>
+  <ion-list>
+    <ion-item *ngFor="let logbook of logbooks">
+      <ion-label>
+        <h2>{{ logbook.name }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</section>
+</ion-content>
+

@@ -1,0 +1,261 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>User List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-label>{{user._id}}</ion-label> -->
+  <!-- (ionChange)="segmentChanged($event)" -->
+  <ion-segment  [(ngModel)]="selectTabs">
+    <ion-segment-button value="lecturer">
+      <ion-label>Lecturer</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="student">
+      <ion-label>Student</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="company">
+      <ion-label>Company</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectTabs === 'lecturer'">
+    <ion-list>
+      <ion-item button *ngFor="let supervisor of Supervisors" (click)="userDetail(supervisor._id,true)">
+        <ion-label>{{supervisor.name}}</ion-label>
+        <div class="item-note" item-end>
+          <!-- <button
+            ion-button
+            clear
+            [routerLink]="['/userDetail/', supervisor._id]">
+            <ion-icon name="create" style="zoom: 1.5"></ion-icon>
+          </button> -->
+          <button ion-button clear (click)="removeUser(supervisor, i)">
+            <ion-icon name="trash" style="zoom: 1.5"></ion-icon>
+          </button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="selectTabs === 'student'">
+    <ion-list>
+      <ion-item *ngFor="let student of Students" (click)="userDetail(student._id,true)">
+        <ion-label>{{student.name}}</ion-label>
+        <div class="item-note" item-end>
+          <button ion-button clear (click)="removeUser(student, i)">
+            <ion-icon name="trash" style="zoom: 1.5"></ion-icon>
+          </button>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+  <div *ngIf="selectTabs === 'company'">
+    <ion-list>
+      <ion-item button *ngFor="let company of Companies" (click)="userDetail(company._id,true)">
+        <ion-label>{{company.name}}</ion-label>
+        <div class="item-note" item-end>
+          <button ion-button clear (click)="removeUser(company, i)">
+            <ion-icon name="trash" style="zoom: 1.5"></ion-icon>
+          </button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- (willDismiss)="onWillDismiss($event) -->
+  <!-- User Detail Modal -->
+  <ion-modal [isOpen]="isUserDetailModal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Details
+          </ion-title>
+          <ion-buttons slot="start">
+            <ion-button (click)="removeUser(userInfo)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="userDetailModalClose(false)">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-card>
+
+          <img src="../../../../assets/shapes.svg" />
+          <ion-card-header>
+            <ion-card-subtitle></ion-card-subtitle>
+            <ion-card-title>{{userInfo.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <ion-grid>
+              <ion-row class="ion-justify-content-start">
+                <ion-col class="ion-padding-bottom">
+                  <div class="ion-text-uppercase" >Username:</div>
+                  <div>{{userInfo.name}}</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-justify-content-start">
+                <ion-col class="ion-padding-bottom">
+                  <div class="ion-text-uppercase">Email:</div>
+                  <div>{{userInfo.email}}</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-justify-content-start">
+                <ion-col>
+                  <div class="ion-text-uppercase">Role:</div>
+                  <div>{{userInfo.role}}</div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+          </ion-card-content>
+        </ion-card>
+
+        <section *ngIf="userInfo.role === 'Supervisor'">
+          <ion-row>
+
+            <ion-col padding>
+              <ion-button expand="block" (click)="assignStudent(true)">Assign Student</ion-button>
+            </ion-col>
+
+          </ion-row>
+
+        </section>
+        <section *ngIf="userInfo.role === 'Student'">
+          <ion-row>
+
+            <ion-col padding>
+              <ion-button expand="block" (click)="viewLogBook(true)">Log Book</ion-button>
+            </ion-col>
+
+          </ion-row>
+
+        </section>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <!-- End User Detail Modal -->
+
+  <!-- User Lise Modal -->
+  <ion-modal [isOpen]="isUserListModal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Assign Student
+          </ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="userListModalClose(false)">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-refresher slot="fixed" (ionRefresh)="doRefresh2($event)">
+          <ion-refresher-content>
+          </ion-refresher-content>
+        </ion-refresher>
+
+        <ion-segment [(ngModel)]="selectTabss">
+          <ion-segment-button value="assigned">
+            <ion-label>Assigned</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="unassign">
+            <ion-label>Unassign</ion-label>
+          </ion-segment-button>
+
+        </ion-segment>
+        <!-- (click)="userDetail(assignedStudentLists,true)" -->
+        <div *ngIf="selectTabss === 'assigned'">
+          <ion-list>
+            <ion-item button *ngFor="let assigned of assignedStudentLists" >
+              <ion-label>{{assigned.name}}</ion-label>
+              <div class="item-note" item-end>
+                <!-- <button
+                  ion-button
+                  clear
+                  [routerLink]="['/userDetail/', supervisor._id]">
+                  <ion-icon name="create" style="zoom: 1.5"></ion-icon>
+                </button> -->
+                <button ion-button clear (click)="removeUser(assigned, i)">
+                  <ion-icon name="trash" style="zoom: 1.5"></ion-icon>
+                </button>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div *ngIf="selectTabss === 'unassign'">
+          <ion-list>
+            <ion-item *ngFor="let unassign of unAssignstudentLists">
+              <!--button (click)="userDetail(company._id)"-->
+              <ion-label>{{unassign.name}}</ion-label>
+              <div class="item-note" item-end>
+                <button ion-button clear (click)="confirmAssign(unassign,i)">
+                  <ion-icon name="add" style="zoom: 1.5"></ion-icon>
+                </button>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- log Book Modal -->
+  <ion-modal [isOpen]="isLogBook">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Log Book
+          </ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="logbookClose(false)">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-card>
+
+          <img src="../../../../assets/shapes.svg" />
+          <ion-card-header>
+            <ion-card-subtitle></ion-card-subtitle>
+            <ion-card-title>{{supervisorName}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let logbook of logbooks">
+                <!--button (click)="userDetail(company._id)"-->
+                <ion-label>{{logbook.name}}</ion-label>
+                <div class="item-note" item-end>
+                  {{logbook.mark}}
+                </div>
+              </ion-item>
+            </ion-list>
+
+          </ion-card-content>
+        </ion-card>
+   
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

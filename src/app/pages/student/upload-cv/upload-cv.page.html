@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button  [icon]="buttonIcon" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Job Listing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" [fullscreen]="true">
+    <ion-list>
+      <form [formGroup]="CVForm">
+         <ion-item>
+           <ion-label class="mytext" position="stacked">Name</ion-label>
+           <ion-input formControlName="name"  type="text" required> </ion-input>
+         </ion-item>
+         <ion-item>
+          <ion-label class="mytext" position="stacked">Degree</ion-label>
+          <ion-input formControlName="degree" type="text" required> </ion-input>
+         </ion-item>
+         <ion-item>
+          <ion-label class="mytext" position="stacked">Skills</ion-label>
+          <ion-input formControlName="skills" type="text" required> </ion-input>
+         </ion-item>
+         <ion-item>
+          <ion-label class="mytext" position="stacked">Notes</ion-label>
+          <ion-input formControlName="note" type="text" required> </ion-input>
+         </ion-item>
+   
+          <ion-row>
+          <ion-col>
+            <ion-button (click)="save()" type="submit" color="danger" shape="full" expand="block">Upload</ion-button>
+          </ion-col>
+          </ion-row>
+
+           <ion-row>
+            <ion-col>
+              <ion-button (click)="cancel()" type="button" color="danger" shape="full" expand="block">Cancel</ion-button>
+            </ion-col>
+           </ion-row>
+   
+       </form>
+     </ion-list>
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color='danger'>
+    <ion-title>Applied</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let applied of studentAppliedList">
+        <ion-label>{{applied.title}}</ion-label>
+        <div class="item-note" item-end>
+          <ion-label>{{ applied.status }}</ion-label>
+        </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

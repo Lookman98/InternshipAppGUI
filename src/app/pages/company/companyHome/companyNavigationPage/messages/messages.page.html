@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Job</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list lines="full">
+      <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input formControlName="title" type="text" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block">Add</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-list>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-content>
+  <div id="splash">
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle></ion-card-subtitle>
+        <ion-card-title> Sign In</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-list lines="full">
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" formControlName="email" name="email" placeholder="Email"></ion-input>
+
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <app-show-hide-password>
+                <ion-input type="password" formControlName="password" name="password" placeholder="Password">
+                </ion-input>
+              </app-show-hide-password>
+            </ion-item>
+
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" color="danger" expand="block">Log In</ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-list>
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+</ion-content>
